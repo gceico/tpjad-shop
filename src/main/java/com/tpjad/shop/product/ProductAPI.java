@@ -9,7 +9,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
-
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api/v1/products")
 @Slf4j
@@ -60,3 +60,5 @@ public class ProductAPI {
         return ResponseEntity.ok().build();
     }
 }
+
+
