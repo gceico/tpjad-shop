@@ -1,0 +1,6 @@
+com\tpjad\shop\product\Product.class
+com\tpjad\shop\product\ProductAPI.class
+com\tpjad\shop\product\ProductRespository.class
+com\tpjad\shop\Application.class
+com\tpjad\shop\product\ProductController.class
+com\tpjad\shop\product\ProductService.class
