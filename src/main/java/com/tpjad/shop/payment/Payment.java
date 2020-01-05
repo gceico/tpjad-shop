@@ -1,4 +1,4 @@
-package com.tpjad.shop.product;
+package com.tpjad.shop.payment;
 
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
@@ -14,18 +14,16 @@ import java.util.Date;
 @Entity
 
 @Data
-public class Product {
+public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    private String details;
 
-    private String description;
+    private BigDecimal total;
 
-    private BigDecimal price;
-
-    private String category;
+    private Date paid;
 
     @CreationTimestamp
     private Date createdAt;

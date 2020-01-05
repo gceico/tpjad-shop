@@ -1,4 +1,4 @@
-package com.tpjad.shop.product;
+package com.tpjad.shop.account;
 
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
@@ -8,24 +8,23 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
 
 @Data
-public class Product {
+public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    private String address;
 
-    private String description;
+    private String email;
 
-    private BigDecimal price;
+    private String phone;
 
-    private String category;
+    private String password;
 
     @CreationTimestamp
     private Date createdAt;

@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 public class ProductService {
-    private final ProductRespository productRespository;
+    private final com.tpjad.shop.product.ProductRespository productRespository;
 
     public List<Product> findAll() {
         return productRespository.findAll();
