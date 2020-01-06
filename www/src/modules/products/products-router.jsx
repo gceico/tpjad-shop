@@ -19,6 +19,11 @@ export default function ProductsRouter({ match }) {
         path={`${match.url}/:id`}
         component={lazy(() => import('./views/products/products-view'))}
       /> */}
+       <Route
+        exact
+        path={`${match.url}/:id`}
+        component={lazy(() => import('./views/product-view'))}
+      />
       <Route component={lazy(() => import('./views/products-list'))} />
     </Switch>
   )
