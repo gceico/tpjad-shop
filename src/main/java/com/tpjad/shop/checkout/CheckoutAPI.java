@@ -1,4 +1,4 @@
-package com.tpjad.shop.charge;
+package com.tpjad.shop.checkout;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -11,25 +11,25 @@ import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping("/api/v1/charges")
+@RequestMapping("/api/v1/checkouts")
 @Slf4j
 @RequiredArgsConstructor
-public class ChargeAPI {
-    private final ChargeService chargeService;
+public class CheckoutAPI {
+    private final CheckoutService checkoutService;
 
     @GetMapping
-    public ResponseEntity<List<Charge>> findAll() {
-        return ResponseEntity.ok(chargeService.findAll());
+    public ResponseEntity<List<Checkout>> findAll() {
+        return ResponseEntity.ok(checkoutService.findAll());
     }
 
     @PostMapping
-    public ResponseEntity create(@Valid @RequestBody Charge charge) {
-        return ResponseEntity.ok(chargeService.save(charge));
+    public ResponseEntity create(@Valid @RequestBody Checkout checkout) {
+        return ResponseEntity.ok(checkoutService.save(checkout));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Charge> findById(@PathVariable Long id) {
-        Optional<Charge> stock = chargeService.findById(id);
+    public ResponseEntity<Checkout> findById(@PathVariable Long id) {
+        Optional<Checkout> stock = checkoutService.findById(id);
         if (!stock.isPresent()) {
             log.error("Id " + id + " is not existed");
             ResponseEntity.badRequest().build();
@@ -39,23 +39,23 @@ public class ChargeAPI {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Charge> update(@PathVariable Long id, @Valid @RequestBody Charge charge) {
-        if (!chargeService.findById(id).isPresent()) {
+    public ResponseEntity<Checkout> update(@PathVariable Long id, @Valid @RequestBody Checkout checkout) {
+        if (!checkoutService.findById(id).isPresent()) {
             log.error("Id " + id + " is not existed");
             ResponseEntity.badRequest().build();
         }
 
-        return ResponseEntity.ok(chargeService.save(charge));
+        return ResponseEntity.ok(checkoutService.save(checkout));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable Long id) {
-        if (!chargeService.findById(id).isPresent()) {
+        if (!checkoutService.findById(id).isPresent()) {
             log.error("Id " + id + " is not existed");
             ResponseEntity.badRequest().build();
         }
 
-        chargeService.deleteById(id);
+        checkoutService.deleteById(id);
 
         return ResponseEntity.ok().build();
     }

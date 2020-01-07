@@ -12,15 +12,14 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
-
 @Data
 public class LineItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long orderId;
-    
+    private Long cartId;
+
     private Long productId;
 
     private BigDecimal price;
