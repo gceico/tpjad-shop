@@ -1,11 +1,8 @@
 com\tpjad\shop\product\Product.class
-com\tpjad\shop\cart\Cart.class
 com\tpjad\shop\session\SessionService.class
-com\tpjad\shop\cart\CartRespository.class
 com\tpjad\shop\Application.class
 com\tpjad\shop\payment\PaymentService.class
 com\tpjad\shop\checkout\CheckoutAPI.class
-com\tpjad\shop\cart\CartAPI.class
 com\tpjad\shop\lineItem\LineItemAPI.class
 com\tpjad\shop\account\AccountRespository.class
 com\tpjad\shop\session\SessionRespository.class
@@ -26,5 +23,4 @@ com\tpjad\shop\product\ProductController.class
 com\tpjad\shop\account\AccountService.class
 com\tpjad\shop\checkout\CheckoutRespository.class
 com\tpjad\shop\product\ProductService.class
-com\tpjad\shop\cart\CartService.class
 com\tpjad\shop\account\AccountAPI.class

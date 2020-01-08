@@ -1,8 +1,8 @@
 import { generateContext } from '../../helpers'
 import {
-  CREATE_CART,
-  CREATE_CART_FAIL,
-  CREATE_CART_SUCCESS,
+  ADD_ITEM,
+  ADD_ITEM_FAIL,
+  ADD_ITEM_SUCCESS,
   DELETE_ITEM,
   DELETE_ITEM_FAIL,
   DELETE_ITEM_SUCCESS,
@@ -15,70 +15,80 @@ import {
 } from './cart-actions'
 
 const initialState = {
-  cartId: undefined,
   cart: [],
+  changed: {},
   loading: false,
   error: undefined
 }
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case CREATE_CART:
-      return {
-        ...state
-      }
-    case CREATE_CART_SUCCESS:
-      return {
-        ...state,
-        cartId: action.payload
-      }
-    case CREATE_CART_FAIL:
-      return {
-        ...state,
-        error: action.payload
-      }
     case GET_CART:
       return {
-        ...state
+        ...state,
+        loading: true,
       }
     case GET_CART_SUCCESS:
       return {
         ...state,
+        loading: false,
         cart: action.payload
       }
     case GET_CART_FAIL:
       return {
         ...state,
+        loading: false,
+        error: action.payload
+      }
+      case ADD_ITEM:
+      return {
+        ...state,
+        loading: true,
+      }
+    case ADD_ITEM_SUCCESS:
+      return {
+        ...state,
+        changed: action.payload,
+        loading: false,
+      }
+    case ADD_ITEM_FAIL:
+      return {
+        ...state,
+        loading: false,
         error: action.payload
       }
     case UPDATE_ITEM:
       return {
         ...state,
-        success: false
+        loading: true,
       }
     case UPDATE_ITEM_SUCCESS:
       return {
         ...state,
-        success: true
+        changed: action.payload,
+        loading: false,
       }
     case UPDATE_ITEM_FAIL:
       return {
         ...state,
+        loading: false,
         error: action.payload
       }
     case DELETE_ITEM:
       return {
         ...state,
-        success: false
+        loading: true,
       }
     case DELETE_ITEM_SUCCESS:
       return {
         ...state,
-        success: true
+        changed: action.payload,
+        loading: false,
       }
     case DELETE_ITEM_FAIL:
       return {
         ...state,
+        loading: false,
         error: action.payload
       }
     default:

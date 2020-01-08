@@ -20,8 +20,8 @@ public class LineItemService {
         return lineItemRespository.findById(id);
     }
 
-    public List<LineItem> findByCartId(Long id) {
-        return lineItemRespository.findByCartId(id);
+    public Optional<List<LineItem>>  findByAccountId(Long accountId) {
+        return lineItemRespository.findByAccountId(accountId);
     }
 
     public LineItem save(LineItem stock) {

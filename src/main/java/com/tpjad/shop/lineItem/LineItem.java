@@ -18,9 +18,11 @@ public class LineItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long cartId;
+    private Long accountId;
 
     private Long productId;
+
+    private String productName;
 
     private BigDecimal price;
 

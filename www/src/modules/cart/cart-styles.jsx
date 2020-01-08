@@ -1,5 +1,5 @@
 import styled from 'styled-components'
 
-export const CartQuantity = styled('div')`
+export const CartQuantityWrapper = styled('div')`
   display:flex;
 `

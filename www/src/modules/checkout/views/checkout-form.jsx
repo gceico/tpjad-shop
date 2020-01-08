@@ -61,7 +61,7 @@ export default function CheckoutForm({ onSubmit, errors, loading }) {
               <Button variant={'link'} href={CART_ROUTE}>
                 Cancel
               </Button>
-              <Button>Place order</Button>
+              <Button type={'submit'}>Place order</Button>
             </Col>
           </Row>
         </form>

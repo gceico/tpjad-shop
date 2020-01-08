@@ -18,8 +18,6 @@ public class Checkout {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long cartId;
-
     private String shipTo;
     
     private Long accountId;

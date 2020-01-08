@@ -6,7 +6,7 @@ import CardColumns from 'react-bootstrap/CardColumns'
 
 import Loader from '../../../components/loader/loader'
 import { PRODUCTS_ROUTE } from '../../../config'
-import { updateItemInCart } from '../../cart/cart-actions'
+import { addToCart } from '../../cart/cart-actions'
 import { CartContext } from '../../cart/cart-context'
 import { getProducts } from '../products-actions'
 import { ProductsContext } from '../products-context'
@@ -19,6 +19,15 @@ export default function ProductsList() {
   useEffect(() => {
     getProducts({ productsContext })
   }, [])
+
+  const onAdd = item => {
+    const { id: productId, name: productName, price } = item
+    addToCart({
+      cartContext,
+      cartId,
+      data: { productId, productName, price, quantity: 1, accountId: 1 }
+    })
+  }
 
   if (loading) {
     return <Loader />
@@ -36,10 +45,7 @@ export default function ProductsList() {
               <Card.Text className={'font-weight-bold text-primary'}>
                 {item.price} RON
               </Card.Text>
-              <Button
-                variant='primary'
-                onClick={() => updateItemInCart({ cartContext, cartId, item })}
-              >
+              <Button variant='primary' onClick={() => onAdd(item)}>
                 Add to cart
               </Button>
               <Button href={`${PRODUCTS_ROUTE}/${item.id}`} variant='link'>

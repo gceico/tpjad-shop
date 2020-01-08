@@ -17,21 +17,20 @@ import java.util.Optional;
 public class LineItemAPI {
     private final LineItemService lineItemService;
 
-    @GetMapping
-    public ResponseEntity<List<LineItem>> findAll() {
-        return ResponseEntity.ok(lineItemService.findAll());
-    }
+    // @GetMapping
+    // public ResponseEntity<List<LineItem>> findAll() {
+    // return ResponseEntity.ok(lineItemService.findAll());
+    // }
 
     @PostMapping
     public ResponseEntity create(@Valid @RequestBody LineItem lineItem) {
         return ResponseEntity.ok(lineItemService.save(lineItem));
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<LineItem> findById(@PathVariable Long id) {
-        Optional<LineItem> stock = lineItemService.findById(id);
+    @GetMapping
+    public ResponseEntity<List<LineItem>> findByAccountId(@RequestParam("accountId") Long accountId) {
+        Optional<List<LineItem>> stock = lineItemService.findByAccountId(accountId);
         if (!stock.isPresent()) {
-            log.error("Id " + id + " is not existed");
             ResponseEntity.badRequest().build();
         }
 
@@ -41,7 +40,6 @@ public class LineItemAPI {
     @PutMapping("/{id}")
     public ResponseEntity<LineItem> update(@PathVariable Long id, @Valid @RequestBody LineItem lineItem) {
         if (!lineItemService.findById(id).isPresent()) {
-            log.error("Id " + id + " is not existed");
             ResponseEntity.badRequest().build();
         }
 
@@ -51,7 +49,6 @@ public class LineItemAPI {
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable Long id) {
         if (!lineItemService.findById(id).isPresent()) {
-            log.error("Id " + id + " is not existed");
             ResponseEntity.badRequest().build();
         }
 
@@ -60,5 +57,3 @@ public class LineItemAPI {
         return ResponseEntity.ok().build();
     }
 }
-
-
