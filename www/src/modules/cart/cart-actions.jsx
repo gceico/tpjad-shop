@@ -15,6 +15,7 @@ export const UPDATE_ITEM_FAIL = 'UPDATE_ITEM_FAIL'
 export const DELETE_ITEM = 'DELETE_ITEM'
 export const DELETE_ITEM_SUCCESS = 'DELETE_ITEM_SUCCESS'
 export const DELETE_ITEM_FAIL = 'DELETE_ITEM_FAIL'
+export const CLEAN_CART = 'CLEAN_CART'
 
 export const getItemsFromCart = async ({ cartContext, accountId }) => {
   let response
@@ -87,6 +88,16 @@ export const updateItemInCart = async ({ cartContext, cartItemId, data }) => {
   }
 }
 
+export const cleanCart = async ({ cartContext }) => {
+  const { cart } = cartContext
+  _.map(cart, item => {
+    deleteItemFromCart({ cartContext, cartItemId: item.id })
+  })
+  cartContext.dispatch({
+    type: CLEAN_CART
+  })
+}
+
 export const deleteItemFromCart = async ({ cartContext, cartItemId }) => {
   let response
   cartContext.dispatch({
@@ -99,7 +110,7 @@ export const deleteItemFromCart = async ({ cartContext, cartItemId }) => {
     })
     cartContext.dispatch({
       type: DELETE_ITEM_SUCCESS,
-      payload: response.data
+      payload: cartItemId
     })
   } catch (err) {
     const error = _.get(err, 'response.data.errors')

@@ -1,16 +1,15 @@
 import { generateContext } from '../../helpers'
 import {
-  DELETE_CHECKOUT,
-  DELETE_CHECKOUT_FAIL,
-  DELETE_CHECKOUT_SUCCESS,
   GET_CHECKOUT,
   GET_CHECKOUT_FAIL,
   GET_CHECKOUT_SUCCESS,
+  PLACE_ORDER,
+  PLACE_ORDER_FAIL,
+  PLACE_ORDER_SUCCESS,
 } from './checkout-actions'
 
 const initialState = {
-  checkout: [],
-  deleted: {},
+  order: {},
   loading: false,
   error: undefined
 }
@@ -25,7 +24,7 @@ const reducer = (state, action) => {
     case GET_CHECKOUT_SUCCESS:
       return {
         ...state,
-        checkout: action.payload,
+        order: action.payload,
         loading: false
       }
     case GET_CHECKOUT_FAIL:
@@ -34,17 +33,18 @@ const reducer = (state, action) => {
         loading: false,
         error: action.payload
       }
-      case DELETE_CHECKOUT:
+      case PLACE_ORDER:
         return {
           ...state,
           loading: true
         }
-      case DELETE_CHECKOUT_SUCCESS:
+      case PLACE_ORDER_SUCCESS:
         return {
           ...state,
+          order: action.payload,
           loading: false
         }
-      case DELETE_CHECKOUT_FAIL:
+      case PLACE_ORDER_FAIL:
         return {
           ...state,
           loading: false,

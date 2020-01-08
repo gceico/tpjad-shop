@@ -1,40 +1,63 @@
-import _ from 'lodash'
 import React, { useContext, useEffect, useState } from 'react'
 import Button from 'react-bootstrap/Button'
 import Card from 'react-bootstrap/Card'
-import CardColumns from 'react-bootstrap/CardColumns'
+import Col from 'react-bootstrap/Col'
+import Image from 'react-bootstrap/Image'
+import Row from 'react-bootstrap/Row'
+import { useLocation } from 'react-router-dom'
 
 import Loader from '../../../components/loader/loader'
-import { getProducts } from '../products-actions'
+import { PRODUCTS_ROUTE } from '../../../config'
+import { addToCart } from '../../cart/cart-actions'
+import { CartContext } from '../../cart/cart-context'
+import { getProductById } from '../products-actions'
 import { ProductsContext } from '../products-context'
 
 export default function ProductView() {
   const productsContext = useContext(ProductsContext)
-  const { loading, products } = productsContext
+  const cartContext = useContext(CartContext)
+  const { loading, current } = productsContext
+  const location = useLocation()
+  const { pathname } = location
+  let id = pathname.split('/')
+  id = id[id.length - 1]
+
   useEffect(() => {
-    getProducts({ productsContext })
-  }, [])
+    getProductById({ productsContext, id })
+  }, [id])
+
+  const onAdd = item => {
+    const { id: productId, name: productName, price } = item
+    addToCart({
+      cartContext,
+      data: { productId, productName, price, quantity: 1, accountId: 1 }
+    })
+  }
 
   if (loading) {
-    return <Loader/>
+    return <Loader />
   }
   return (
-    <>
-      <CardColumns>
-        {_.map(products, item => (
-            <Card>
-              <Card.Img variant='top' src={item.photo} />
-              <Card.Body>
-                <Card.Title>{item.name}</Card.Title>
-                <Card.Text>{item.description}</Card.Text>
-                <Card.Text>{item.category}</Card.Text>
-                <Card.Text>{item.price} RON</Card.Text>
-                <Button variant='primary'>Add to cart</Button>
-                <Button href={'#'} variant='link'>Details</Button>
-              </Card.Body>
-            </Card>
-        ))}
-      </CardColumns>
-    </>
+    <Row>
+      <Col md={4}>
+        <Image  thumbnail src={current.photo}  />
+      </Col>
+      <Col md={8}>
+        <Card>
+          <Card.Body>
+            <Card.Title>{current.name}</Card.Title>
+            <Card.Text>{current.description}</Card.Text>
+            <Card.Text>{current.category}</Card.Text>
+            <Card.Text>{current.price} RON</Card.Text>
+            <Button variant='primary' onClick={() => onAdd(current)}>
+              Add to cart
+            </Button>
+            <Button variant={'link'} href={PRODUCTS_ROUTE}>
+              Back to shopping
+            </Button>
+          </Card.Body>
+        </Card>
+      </Col>
+    </Row>
   )
 }
