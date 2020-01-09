@@ -20,6 +20,10 @@ public class CheckoutService {
         return checkoutRespository.findById(id);
     }
 
+    public Optional<List<Checkout>>  findByAccountId(Long accountId) {
+        return checkoutRespository.findByAccountId(accountId);
+    }
+
     public Checkout save(Checkout stock) {
         return checkoutRespository.save(stock);
     }

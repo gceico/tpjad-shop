@@ -3,6 +3,7 @@ import {
   ADD_ITEM,
   ADD_ITEM_FAIL,
   ADD_ITEM_SUCCESS,
+  CLEAN_CART,
   DELETE_ITEM,
   DELETE_ITEM_FAIL,
   DELETE_ITEM_SUCCESS,
@@ -90,6 +91,12 @@ const reducer = (state, action) => {
         ...state,
         loading: false,
         error: action.payload
+      }
+    case CLEAN_CART:
+      return {
+        ...state,
+        cart: [],
+        changed: undefined
       }
     default:
       return state

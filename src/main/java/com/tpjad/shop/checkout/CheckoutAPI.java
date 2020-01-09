@@ -18,10 +18,14 @@ public class CheckoutAPI {
     private final CheckoutService checkoutService;
 
     @GetMapping
-    public ResponseEntity<List<Checkout>> findAll() {
-        return ResponseEntity.ok(checkoutService.findAll());
-    }
+    public ResponseEntity<List<Checkout>> findByAccountId(@RequestParam("accountId") Long accountId) {
+        Optional<List<Checkout>> stock = checkoutService.findByAccountId(accountId);
+        if (!stock.isPresent()) {
+            ResponseEntity.badRequest().build();
+        }
 
+        return ResponseEntity.ok(stock.get());
+    }
     @PostMapping
     public ResponseEntity create(@Valid @RequestBody Checkout checkout) {
         return ResponseEntity.ok(checkoutService.save(checkout));

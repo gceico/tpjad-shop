@@ -43,7 +43,6 @@ export default function Cart() {
         <thead>
           <tr>
             <th>Product</th>
-            <th>Description</th>
             <th>Price/Unit</th>
             <th>Quantity</th>
             <th>Total</th>
@@ -52,8 +51,7 @@ export default function Cart() {
         <tbody>
           {_.map(cart, item => (
             <tr>
-              <td>{item.name}</td>
-              <td>{item.description}</td>
+              <td>{item.productName}</td>
               <td>{item.price}</td>
               <td>
                 <CartQuantity

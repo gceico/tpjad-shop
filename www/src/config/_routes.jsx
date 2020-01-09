@@ -17,6 +17,9 @@ export const CART_ROUTE = '/cart'
 // Checkout
 export const CHECKOUT_ROUTE = '/checkout'
 
+// Order
+export const ORDERS_ROUTE = '/orders'
+
 //CRUD
 export const ADD_ROUTE = '/add'
 export const EDIT_ROUTE = '/edit'

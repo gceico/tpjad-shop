@@ -18,7 +18,11 @@ public class ProductAPI {
     private final ProductService productService;
 
     @GetMapping
-    public ResponseEntity<List<Product>> findAll() {
+    public ResponseEntity<List<Product>> findAll(@RequestParam("category") String category) {
+        if (!category.equals("all")) {
+            List<Product> products = productService.findByCategory(category);
+            return ResponseEntity.ok(products);
+        }
         return ResponseEntity.ok(productService.findAll());
     }
 
@@ -31,11 +35,10 @@ public class ProductAPI {
     public ResponseEntity<Product> findById(@PathVariable Long id) {
         Optional<Product> stock = productService.findById(id);
         if (!stock.isPresent()) {
-            log.error("Id " + id + " is not existed");
             ResponseEntity.badRequest().build();
         }
-
         return ResponseEntity.ok(stock.get());
+
     }
 
     @PutMapping("/{id}")
@@ -60,5 +63,3 @@ public class ProductAPI {
         return ResponseEntity.ok().build();
     }
 }
-
-
