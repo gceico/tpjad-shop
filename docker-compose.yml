@@ -10,7 +10,7 @@ services:
     - "3306:3306"
     restart: always
 
-  crud-mysql-vuejs:
+  tpjad-shop:
     build: .
     volumes:
     - .:/app
